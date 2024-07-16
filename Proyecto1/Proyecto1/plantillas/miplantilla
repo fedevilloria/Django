@@ -1,0 +1,49 @@
+<html>
+    <body>
+
+        {% include "barra.html" %} <!-- Asi se incrusta una plantilla dentro de otra con Django. -->
+
+        <h1>
+            "Hola mi gente linda"
+        </h1>
+
+
+        <!--No es recomendable abusar de controles de flujo dentro de la plantilla, porque la filosofia de Django es separar la parte logica de la parte de diseno, se supone que la parte logica deberia estar en la parte de "views.py"-->
+        {% if nombre_persona == "Profe Juan" %}
+
+        <p>El curso lo realiza el profesor titular</p>
+
+        {% else %}
+            <p>El curso lo realiza el profesor suplente</p>
+
+        {% endif %}
+
+
+        <p>El nombre del profesor es: {{nombre_persona}} {{apellido_persona}}</p> <!--Esto es para rescatar el nombre del codigo, lo que hago es llamar al contexto la parte del identificador, en este caso seria nombre de persona, y lo que me devuelve el documento seria el valor almacenado dentro de ese identificador, el cual es lo que este dentro de la variable "nombre"-->
+
+        <!--Django tambien nos permite poner metodos dentro de los corchetes, por ejemplo en {{nombre_persona}} si lo queremos pasar a mayuscula usamos el metodo upper(), {{nombre_persona.upper}} En Django no se utiliza los parentesis al final del metodo.-->
+
+        <!--Existen los filtros, el cual se escribe con este caracter "|" (shift+\). Por ejemplo si escribimos: tema|first, solo aparecera la primera letra de la lista. Filtros encadenados tambien se pueden usar, por ejemplo tema|first|lower, esto haria que la primer letra si esta en mayuscula la convierta a minuscula.-->
+
+        <!--En caso que haya mas de dos valores a referenciar, se utiliza ambos identificadores.-->
+        <p>Estamos viendo el tema de las plantillas a dia: {{momento_actual.date}}</p>
+        <p>{{temas.2}}</p> <!-- {{temas}} -> Con este formato lo que va a hacer es imprimir la lista tal cual se encuentra en el diccionario, con corchetes incluidos. Ahora si yo quiero acceder a un valor en concreto dentro de esa lista lo que voy a hacer es utilizar el punto y la posicion del indice la cual me quiero referenciar, por ejemplo para hacer referencia a "Formularios" su posicion es 2, entonces quedaria {{temas.2}}-->
+
+        {# {% for %}  Los bucles en las plantillas de Django van entre llaves y dentro de la llave el %. Luego para cerrar el bucle se debe escribir {% endfor %} #}
+
+        {#Esto es un comentario de Django que no interfiera con el codigo#}
+        <p>
+            <ul>
+            {% if temas %} <!-- Esto lo que hace es evaluar que "temas" exista y que ademas de existir tenga informacion. Si existe pero no tiene informacion, no entra el if, y si no existe tampoco entra en el if. -->
+
+                {% for tema in temas %}
+                    <li>{{ tema }}</li>
+                {% endfor %}
+
+            {% else %}
+                <p>No hay elementos que mostrar</p>
+            {% endif %}
+            </ul>
+        </p>
+    </body>
+</html>

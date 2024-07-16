@@ -1,0 +1,51 @@
+Plantillas
+
+Son cadenas de texto que pueden contener material HTML (casi siempre va a pasar) pero no exclusivamente tendra esto, tambien se pueden crear plantillas con cualquier otra herramienta de texto plano.
+
+Sirven para separar la parte logica de la parte visual de un documento web.
+
+Se utilizan de diversas formas, la mas habitual es guardar la cadena de texto en un documento independiente (HTML) y luego cargar ese documento desde la vista.
+
+La ventaja de utilizar esto es que se pueden realizar cambios en el diseño con independencia del codigo de la vista. Por un lado se manipula la logica y por otro el diseño. Otra ventaja es que se puede diversificar el trabajo del proyecto, los programadores unicamente se meten en la parte de la logica y los diseñadores se meten unicamente en la parte de la presentacion o las vistas web. Otra ventaja es que se puede trabajar a la vez en ambas disciplinas.
+
+    Como se usan?
+1- Crear el objeto de tipo Template plt=Template(doc_externo.read())
+
+2- Crear el contexto ctx=Context()
+    
+    Un contexto son los datos adicionales que puede llegar a utilizar ese template.
+
+3- Renderizar el objeto Template documento = plt.render(ctx)
+
+    Hay que pasarle por parametro el contexto aunque este vacio.
+
+
+    USO DE VARIABLES EN PLANTILLAS
+Desde la plantilla se puede utilizar variables que estan referenciadas en las views o en la parte de codigo. Esto es posible trabajando con el contexto.
+Al igual que como se puede trabajar con variables simples, tambien se puede utilizar las librerias de python. Para que el diccionario pueda acceder a esa informacion lo que tenemos que hacer es guardar el valor en una variable y luego referenciarla en el diccionario.
+    
+    Jerarquia u Orden de Llamadas
+Esto es cuando ponemos un . lo que hace Django es buscar primero en un Diccionario a ver si el usuario quiere acudir a eso, si esto no corresponde a un elemento en un diccionario, lo que busca es un Atributo o Propiedad correspondiente a una clase, si no corresponde a esto, lo que hace es buscar a un Metodo perteneciente a un objeto y por ultimo se fija en si el . hace referencia a un Indice de Lista.
+Entonces el orden interno que sigue Django queda asi:
+    1º- Diccionario
+    2º- Atributo
+    3º- Metodo
+    4º- Indice de Lista
+
+Propiedades o Programacion Orientada a Objetos
+
+Cada funcion tiene propiedades, para veer estas propiedades se ehace con el punto (.) despues de la funcion y se despliega el menu contextual, si no lo hace, es porque no se importo la libreria probablemente.
+
+Puedes crear tus propias clases y acceder a propiedades de esas instancias de clases creadas en el futuro.
+
+Cargador de plantilla
+Loader: Sirve para hacer referencia a un archivo de forma mas simple.
+Para poder utilizarlo hay que primero importarlo, luego le vamos a especificar donde guardariamos nuestras plantillas para que el loader pueda encontrarlas y por ultimo le especificamos la plantilla que vamos a usar en el momento.
+
+Shortcut
+Utilizamos el modulo render de la libreria shortcut de Django, esto nos simplifica varias lineas de codigo. Los primeros dos atributos son obligatorios, es decir, siempre lleva como atributo request y luego la plantilla con el nombre propio (return render(request, nombre_plantilla, context)), el tercer argumento es opcional, el contexto a ser un diccionario en este shortcut lo que podemos hacer es directamente pasar el diccionario en vez de la variable del contexto. Con esto nos olvidamos de tener que cargar una plantilla, renderizarla y luego pasarle el contexto, nos ahorra muchas lineas de codigo.
+
+Plantillas incrustadas
+Como ya sabemos los sistemas web utilizan mas de un archivo HTML porque por ejemplo para hacer una pagina web y utilizar una barra de navegacion, a esa barra la vamos a tener que usar en las diferentes vistas, entonces para no escribir 20 veces el mismo codigo se hace en un documento externo y luego lo importas dentro del documento que estas trabajando.
+Para incrustar una plantilla se debe ir a la posicion donde queremos colocar la plantillay debemos escribir lo siguiente {% include "nombre_plantilla" %}.
+Tambien se suele ver mucho subcarpetas dentro de la carpeta "Plantilla" mas que nada para tener bien organizado lo que vas a utilizar. Pero si utilizamos estas subcarpetas hay que cambiar la configuracion para que Django pueda saber donde buscar las subcarpetas, esto se hace dentro del "include", y queda de la siguiente manera: {% include "subcarpeta/nombre_plantilla" %}.
