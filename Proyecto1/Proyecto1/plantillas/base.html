@@ -1,0 +1,26 @@
+<html>
+
+    <head>
+        <title>
+            {% block title %} {% endblock %} 
+        </title>
+        <!-- Con esto indicamos que hay un bloque de texto o contenido, en este caso el titulo, y que eso puede cambiar. -->
+
+    </head>
+    
+    <body>
+        <h1 style="background-color: brown; color: white; text-align: center;">Fedev</h1>
+
+        {% include "barra.html" %} <!-- Con esto lo que hago es incrustar o imporar la barra que habiamos hecho la otra vez en la posicion donde desee, en este caso va a aparecer abajo del titulo h1. -->
+
+        <h3>Sistemas web, sistemas apps y diseño </h3>
+
+
+        {% block content %} {% endblock %} <!-- Con esto indicamos que hay un bloque de texto o contenido, en este caso el cuerpo de la pagina, y que eso puede cambiar. Se puede poner en linea o en lineas diferentes. Lo que representa es que lo que aparezca entre medio de ellas puede variar. -->
+
+
+        <p style="background-color: brown; color: white; text-align: right;">Cursos gratuitos. Gracias por su visita</p>
+
+
+    </body>
+</html>

@@ -153,3 +153,11 @@ def saludo(request):
 
     # En este momento estamos usando el modulo render de la libreria shortcut de Django, esto nos simplifica varias lineas de codigo. El primero y el segundo atributo son obligatorios, es decir, siempre lleva como atributo request y luego la plantilla con el nombre propio, el tercer argumento es opcional, en este caso es el contexto que ya definimos anteriormente, le pasamos directamente el diccionario en vez de la variable del contexto. Con esto nos olvidamos de tener que cargar una plantilla, renderizarla y luego pasarle el contexto, nos ahorra muchas lineas de codigo.
     return render(request, "miplantilla", {"nombre_persona": p1.nombre, "apellido_persona": p1.apellido, "momento_actual": ahora, "temas": temas_del_curso})
+
+def cursoc(request):
+    fecha_actual = datetime.datetime.now()
+    return render(request, "cursoc.html", {"fecha":fecha_actual}) # Aca lo que hacemos es actualizar la vista para la nueva plantilla, en este caso le pasamos los valores del dia que solicitamos en dicha plantilla.
+
+def cursocss(request):
+    fecha_actual = datetime.datetime.now()
+    return render(request, "cursocss.html", {"fecha": fecha_actual})

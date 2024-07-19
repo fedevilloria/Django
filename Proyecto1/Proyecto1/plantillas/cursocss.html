@@ -1,0 +1,9 @@
+{% extends "base.html" %} <!-- Unicamente con esta linea la plantilla "cursoc.html" acaba de heredar toda la plantilla padre llamada "base.html" -->
+
+{% block title %} Curso CSS {% endblock %} <!-- Como sabemos por los comentarios de la otra plantilla esto es lo que va cambiar, entonces lo nombramos y escribimos aca, le podemos cambiar el titulo en este caso. -->
+
+{% block content %}
+
+<p> Estamos a dia: {{fecha}} </p>
+<iframe width="907" height="510" src="https://www.youtube.com/embed/YRxoFc3e5sA" title="¿ESE ES EL AMONG US? JOSEDEODO LEYENDO SOLICITUDES DE UNBAN 😂 // Josedeodo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+{% endblock %}

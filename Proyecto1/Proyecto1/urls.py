@@ -28,6 +28,8 @@ from Proyecto1.views import despedida
 from Proyecto1.views import fecha
 from Proyecto1.views import calculaEdad
 from Proyecto1.views import saludo
+from Proyecto1.views import cursoc
+from Proyecto1.views import cursocss
 
 urlpatterns = [
     # La url no tiene porque llamarse igual que la funcion, en la primera parte de la coma. Solo que es mas facil comprender a que se esta referenciando. En la segunda coma se especifica la vista que tiene que referenciar esta url. NUNCA OLVIDARSE DE LA COMA AL FINAL.
@@ -41,5 +43,9 @@ urlpatterns = [
     path('edades/<int:edad>/<int:anio>', calculaEdad), # Para pasarle dos parametros hay que agregarlo en el path quedaria: 'edades/<int:edad>/<int:anio>'
 
     path('saludo/', saludo),
+
+    path('cursoc/', cursoc),
+
+    path('cursocss/', cursocss),
 ]
 

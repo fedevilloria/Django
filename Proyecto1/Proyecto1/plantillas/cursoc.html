@@ -1,0 +1,9 @@
+{% extends "base.html" %} <!-- Unicamente con esta linea la plantilla "cursoc.html" acaba de heredar toda la plantilla padre llamada "base.html" -->
+
+{% block title %} Curso C# {% endblock %} <!-- Como sabemos por los comentarios de la otra plantilla esto es lo que va cambiar, entonces lo nombramos y escribimos aca, le podemos cambiar el titulo en este caso. -->
+
+{% block content %}
+
+<p> Estamos a dia: {{fecha}} </p>
+<iframe width="907" height="491" src="https://www.youtube.com/embed/d1-UX6aR_TM" title="Curso Django. Plantillas VI. Herencia de plantillas. Vídeo 10" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+{% endblock %}
