@@ -54,3 +54,5 @@ Herencia de Plantillas
 Consiste en crear una plantilla padre en la cual se va a basar el resto de plantillas del sitio web, esta plantilla contendra una estructura la cual el resto de plantillas seguira esa estructura. Practicamente todos los sitios web repiten el mismo patron, la cabecera y la parte inferior (footer) entonces lo que se hace es crear una plantilla padre con la cabecera y el pie, luego a la zona central se le indica que va a ser un contenido o un bloque cambiante. La ventaja de esto es que al repetir plantillas no es necesario repetir tanto codigo, se utiliza muy poco. Para indicarle a Django que estas plantillas van a heredar las caracteristicas del padre se escribe lo siguiente: {% extends "nombre_plantilla_padre" %}. Para que funcione este comando tiene que ser el primero que aparezca en el codigo de las plantillas hijas.
 En este caso se suele utilizar a la plantilla padre con el nombre de "base".
 Una vez creamos la plantilla padre e hijas lo que tenemos que hacer es registrar la VISTA y luego la URL.
+
+anotaciones random
