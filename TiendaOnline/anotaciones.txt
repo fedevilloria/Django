@@ -68,3 +68,39 @@ Las bases de datos se crean automaticamente con Django porque es el que tiene in
 
 Crear tablas
 Para crear tablas vamos a utilizar una clase llamada model, esta clase tiene todas las propiedades y herramientas para poder manejar la base de datos, crear tablas, borrar tablas, crear campos, borrar campos, etc. Django no puede trabajar con modelos si no has creado una aplicacion
+
+Dentro del archivo models hay que crear una clase model por cada tabla que necesitemos que tenga la base de datos
+
+Una vez realizadas las tablas hay que agregar la app en el archivo settings, para agregarlo simplemente escribimos el nombre de la app entre comillas y luego la coma y estaria listo.
+
+Ahora para migrar estas tablas a la base de datos lo primero que hay que hacer es decirle a Django que estas tablas existen, para eso utilizamos el comando en la consola que dice lo siguiente: "python manage.py makemigrations". Esto inicia la creacion de los archivos para poder migrarlos a la base de datos, junto con esto nos proporciona un numero de version de las tablas, ese numero lo vamos a utilizar para que estos archivos migren hacia la base de datos, esto lo hacemos con el siguiente comando: "python manage.py sqlmigrate nombre_app numero_version". Una vez terminado esto simplemente pulleamos las tablas con el comando: "python manage.py migrate".
+
+Para pasarle valores a las variables de momento lo vamos a hacer a traves de consola. Lo que hacemos es abrir el shell del proyecto con el siguiente comando: "python manage.py shell". Luego de esto importamos la clase modelo a trabajar, en este caso usamos el modelo de Articulos (from gestionPedidos.models import Articulos). Para poder agregar los valores lo que hacemos es crear una variable temporal y en el interior escribimos los valores: "art=Articulos(nombre="escritorio", seccion="decoracion", precio=90)". Si bien estos cambios todavia no se visualizan hasta que se ejecute el comando de art.save(), seria el nombre de la variable temporal seguido del save(). Todo esto se puede hacer en un unico paso tambien, se escribe el siguiente codigo: "art3 = Articulos.objects.create(nombre="", seccion="", precio=)".
+
+Para actualizar un valor en concreto se utiliza la variable local y le cambiamos el atributo que queremos, por ejemplo, si quiero cambiar el precio hay que escribir "art.precio=95" y luego para actualizarla en la base de datos escribimos "art.save()".
+
+Para borrar un registro de la lista lo que hacemos es obtener el registro y luego borrarlo, para obtenerlo escribimos en una variable local, en este caso seria "art4 = Articulos.objects.get(id=2)" y el id del objeto que queremos borrar, una vez obtenido ese objeto ingresamos el comando "art4.delete()".
+
+Para realizar la consulta de tipo select para verificar los registros que tenemos lo que hacemos es primero guardar en una variable local aquellos registros que estan creados en la base de datos "Lista = Articulos.objects.all()", una vez obtenemos todos los registros para visualizarlos ponemos "Lista.query.__str__()" y nos devuelve aquellos registros existentes en la base de datos.
+
+Como hacer consultas de tipo select con criterios:
+Para hacer la consulta con criterios lo que hay que hacer es primero decirle a Django que lo que nos devolvera tiene que ser en cadena de caracteres o str porque sino nos va a devolver una lista unicamente con las posiciones de los articulos seleccionados por el filtro. Para ello hay que crear la funcion __str__ en la seccion de models dentro de la clase que quiero que devuelva, en este caso lo vamos a hacer en articulos, la funcion sera la siguiente: 
+    def __str__(self):
+        return "El nombre es %s la seccion es %s y el precio es %s" %(self.nombre, self.seccion, self.precio)
+
+con esto ya solucionariamos la salida que nos da los datos especificos. Pero a modo de recuerdo una vez que hacemos cambios en models hay que volver a migrarlas. Una vez la migramos volvemos a intentar el codigo que hicimos en un principio: Articulos.objects.filter(seccion="deportes"). Para utilizar mas de un criterio por consola simplemente hay que agregarle una coma, por ejemplo, Articulos.objects.filter(,nombre="pelota", seccion="deportes") Entonces lo que nos devuelve sera la pelota que pertenezca a la seccion de deportes, en caso que haya una pelota de juguete por ejemplo.
+En el caso que querramos filtrar por precios hay que tener cuidado con el shell porque no toma los simbolos > (mayor) y < (menor) como tal, sino que hay que escribir __gte (greater than) y __lte (lesser than) respectivamente y quedaria de la siguiente forma:
+    Articulos.objects.filter(seccion="deportes", precio__gte=100) Aca nos devolvera los articulos que valgan mas de 100 en la seccion de deportes.
+    
+    Articulos.objects.filter(seccion="deportes", precio__lte=100) Aca nos devolvera los articulos que valgan menos de 100 en la seccion de deportes.
+
+Tambien hay una forma de ponerle un rango de precios y esto se hace con __range() y quedaria de la siguiente forma: Articulos.objects.filter(seccion="deportes", precio__range(100, 110)) entonces nos devolvera los articulos que esten dentro de ese rango de precios en la seccion especificada
+
+Podemos ordenar la salida que por defecto lo hara de mayor a menor, esto se hace con la funcion order_by y se utiliza de la siguiente forma: Articulos.objects.filter(precio__gte=50). Aca le estoy pidiendo que me devuelva todos los articulos que su precio sea mayor a 50. Para ordenarlos en la salida se le agrega la funcion antes mencionada: Articulos.objects.filter(precio__gte=50).order_by("precio"). Para ordernarlo de mayor a menor se le agrega el signo - antes del filtro precio y queda asi: Articulos.objects.filter(precio__gte=50).order_by("-precio").
+
+
+
+Panel de Administracion
+
+Por defecto Django ya trabaja con un panel de administraccion, para acceder a el necesitamos crear un superusuario, para hacerlo ingresamos lo siguiente por consola: python manage.py createsuperuser, una vez enviada esa peticion nos va a pedir una serie de datos, entre ellas la contrasena. Una vez creado el superusuario nos dirigimos a la url del panel.
+
