@@ -55,6 +55,7 @@ Consiste en crear una plantilla padre en la cual se va a basar el resto de plant
 En este caso se suele utilizar a la plantilla padre con el nombre de "base".
 Una vez creamos la plantilla padre e hijas lo que tenemos que hacer es registrar la VISTA y luego la URL.
 
+<<<<<<< HEAD
 PROYECTO VS APLICACION
 Django hace una distincion entre estos dos conceptos, para trabajar con bases de datos hay que saber esta diferencia. Una aplicacion forma parte de un proyecto, el proyecto es aquel que creamos que no tiene dificultad alguna, la dificultad es ponerlo en funcionamiento. Es decir que la aplicacion siempre va a estar dentro del proyecto y un proyecto dependiendo de la complejidad puede tener de ninguna a muchas aplicaciones.
 
@@ -68,3 +69,6 @@ Las bases de datos se crean automaticamente con Django porque es el que tiene in
 
 Crear tablas
 Para crear tablas vamos a utilizar una clase llamada model, esta clase tiene todas las propiedades y herramientas para poder manejar la base de datos, crear tablas, borrar tablas, crear campos, borrar campos, etc. Django no puede trabajar con modelos si no has creado una aplicacion
+=======
+anotaciones random
+>>>>>>> f5db3c1fd96a871ee9c6d2f381ce378ce4137313
