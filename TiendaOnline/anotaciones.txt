@@ -102,5 +102,9 @@ Podemos ordenar la salida que por defecto lo hara de mayor a menor, esto se hace
 
 Panel de Administracion
 
-Por defecto Django ya trabaja con un panel de administraccion, para acceder a el necesitamos crear un superusuario, para hacerlo ingresamos lo siguiente por consola: python manage.py createsuperuser, una vez enviada esa peticion nos va a pedir una serie de datos, entre ellas la contrasena. Una vez creado el superusuario nos dirigimos a la url del panel.
+Por defecto Django ya trabaja con un panel de administracion, para acceder a el necesitamos crear un superusuario, para hacerlo ingresamos lo siguiente por consola: python manage.py createsuperuser, una vez enviada esa peticion nos va a pedir una serie de datos, entre ellas la contrasena. Una vez creado el superusuario nos dirigimos a la url del panel.
 
+Para poder controlar el panel de administracion desde la web lo que hay que hacer es importar el model a trabajar.
+Dentro del panel de administracion a la hora de crear un cliente u articulo todos los campos por defecto son obligatorios, para poder cambiar esto hay que ir a la pestana models y agregarle los siguientes parametros: blank=True, null=True. Quedaria asi completo: email = models.EmailField(blank=True, null=True). En este caso ya no se hara obligatorio rellenar el campo "email".
+
+Para poder cambiar la vista del campo que queremos ver simplemente agregamos el metodo __str__(), como parametro le pasamos el self y que nos devuelva la variable que querramos con self.variable. Con este metodo solo podemos ver una variable, pero hay otro metodo que nos deja ver mas de dos variables, esta es la clase ModelAdmin, esta clase nos permite hacer modificaciones como administrador en el panel de administracion
