@@ -107,4 +107,31 @@ Por defecto Django ya trabaja con un panel de administracion, para acceder a el 
 Para poder controlar el panel de administracion desde la web lo que hay que hacer es importar el model a trabajar.
 Dentro del panel de administracion a la hora de crear un cliente u articulo todos los campos por defecto son obligatorios, para poder cambiar esto hay que ir a la pestana models y agregarle los siguientes parametros: blank=True, null=True. Quedaria asi completo: email = models.EmailField(blank=True, null=True). En este caso ya no se hara obligatorio rellenar el campo "email".
 
-Para poder cambiar la vista del campo que queremos ver simplemente agregamos el metodo __str__(), como parametro le pasamos el self y que nos devuelva la variable que querramos con self.variable. Con este metodo solo podemos ver una variable, pero hay otro metodo que nos deja ver mas de dos variables, esta es la clase ModelAdmin, esta clase nos permite hacer modificaciones como administrador en el panel de administracion
+Para poder cambiar la vista del campo que queremos ver simplemente agregamos el metodo __str__(), como parametro le pasamos el self y que nos devuelva la variable que querramos con self.variable. Con este metodo solo podemos ver una variable, pero hay otro metodo que nos deja ver mas de dos variables, esta es la clase ModelAdmin, esta clase nos permite hacer modificaciones como administrador en el panel de administracion.
+
+
+
+Formularios
+
+Request es enviarle informacion al servidor y decirle que haga algo, este request tiene numerosos metodos y propiedades para operar con el servidor.
+
+Para crear el formulario recordar hacer el input, una vez tenemos el input vamos a tener que marcarle el tipo de metodo ya sea GET o POST, la diferencia entre ellos es que se envia la informacion mediante url o no. Una vez creamos el input es importante resaltar el atributo name, ya que eso es lo que nos va a ayudar a localizar ese campo para luego poder manejar los datos que se ingresen.
+
+Envio de email
+Para poder enviar mails con Django lo primero que hay que hacer es buscar un servidor de correo que nos permita utilizar sus parametros para que desde nuestro framework podamos enviar los correos. Estos parametros primero se configuran en el archivo settings.py agregando las siguientes lineas:
+    EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_USE_TLS = True
+    EMAIL_PORT = 587
+    EMAIL_HOST_USER = 'mail del host'
+    EMAIL_HOST_PASSWORD = 'Serial que nos devuelve gmail al crear la contrasena de aplicacion.'
+
+Una vez configurado Django se procede con las siguientes instrucciones 
+from django.core.mail import send_mail
+send_mail(
+    "Asunto",
+    "Mensaje.",
+    "from@example.com",
+    ["to@example.com"],
+    fail_silently=False,
+)
